@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template/template :: head">
+</head>
+
+<body>
+	<header th:replace="template/template :: header"></header>
+
+	<br>
+
+	<div class="container">
+		<div class="card bg-Light">
+			<div class="card-header bg-info text-white" th:text="${title}"></div>
+			<div class="card-body">
+				<form th:action="@{/pokemon/evolutions/save}" th:object="${evolution}" method="post">
+					<div class="form-group row">
+						<input type="hidden" th:field="*{idEvolution}">
+						<input type="hidden" th:field="*{pokemon}">
+						<label class="col-md-2" for="name">Name:</label>
+						<input type="text" th:field="*{name}" class="form-control form-control-sm col-md-6" id="name"
+							placeholder="Evolution Name">
+						<small class="form-text text-danger col" th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}">
+						</small>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2" for="type">Type:</label>
+						<input type="text" th:field="*{type}" class="form-control form-control-sm col-md-6" id="type"
+							placeholder="Evolution Type">
+						<small class="form-text text-danger col" th:if="${#fields.hasErrors('type')}"
+							th:errors="*{type}">
+						</small>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2" for="secondType">Second Type:</label>
+						<input type="text" th:field="*{extraType}" class="form-control form-control-sm col-md-6"
+							id="secondType" placeholder="Evolution Second Type">
+						<small class="form-text text-danger col" th:if="${#fields.hasErrors('extraType')}"
+							th:errors="*{extraType}">
+						</small>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2" for="evolutionLevel">Evolves At Level:</label>
+						<input type="text" th:field="*{evolutionLevel}" class="form-control form-control-sm col-md-6"
+							id="evolutionLevel" placeholder="Evolves At Level">
+						<small class="form-text text-danger col" th:if="${#fields.hasErrors('evolutionLevel')}"
+							th:errors="*{evolutionLevel}">
+						</small>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2" for="abilities">Abilities:</label>
+						<select th:field="*{abilities}" class="form-control form-control-sm col-md-6" id="abilities"
+							multiple>
+							<option th:each="ability:${listedAbilities}" th:value="${ability.idAbility}"
+								th:text="${ability.name}" />
+						</select>
+						<small class="form-text text-danger col" th:if="${#fields.hasErrors('abilities')}"
+							th:errors="*{abilities}">
+						</small>
+					</div>
+					<div class="card-footer bg-info">
+						<input type="submit" class="btn btn-dark btn-sm" value="Save" />
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	</br>
+
+	<footer th:replace="template/template :: footer"> </footer>
+
+</body>
+
+</html>

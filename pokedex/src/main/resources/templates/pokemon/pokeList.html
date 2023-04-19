@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template/template :: head">
+</head>
+
+<body>
+	<header th:replace="template/template :: header"></header>
+	
+	<div class="container center">
+		<br>
+			<h1 class="" th:text="${title}"></h1>
+		</br>
+	</div>
+	<div class="container">
+
+		<a class="btn btn-success btn-sm mb-3" th:href="@{/pokemon/register}" th:text="'Register New Pokémon'"
+			title="Register New Pokémon">
+		</a>
+		<a class="btn btn-danger btn-sm mb-3" th:href="@{/(format=pdf)}" th:text="'PDF'"
+			title="View Pokémon PDF" target="_blank">
+		</a>		
+
+		<div class="table-responsive card bg-dark  table-striped" th:if="${not #lists.isEmpty(pokemons)}">
+			<table class="table table-success ">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Type</th>
+						<th scope="col">Second Type</th>
+						<th scope="col">Found At Level</th>
+						<th scope="col">Abilities</th>
+						<th scope="col">Evolutions</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pk:${pokemons}">
+						<th scope="row" th:text="${pk.name}"></th>
+						<td th:text="${pk.type}"></td>
+						<td th:text="${pk.extraType}"></td>
+						<td th:text="${pk.foundLevel}"></td>
+						<td>
+							<ul>
+								<li th:each="ab: ${pk.abilities}" th:text="${ab.name}"></li>
+							</ul>
+						</td>
+
+						<td>
+							<a class="btn btn-info btn-sm" th:href="@{/pokemon/evolutions/} + ${pk.idPokemon}"
+								th:text="'View'" title="Evolutions">
+							</a>
+							<a class="btn btn-info btn-sm"
+								th:href="@{/pokemon/evolutions/} + ${pk.idPokemon} + @{/register}" th:text="'Add'"
+								title="Add new evolution">
+							</a>
+						</td>
+						<td>
+							<a class="btn btn-sm btn-lg" th:href="@{/pokemon/edit/} + ${pk.idPokemon}"
+								title="Edit Pokémon">
+								<img class="img-responsive center-box" th:src="@{/images/edit.png}" height="auto">
+							</a>
+						</td>
+						<td>
+							<a class="btn btn-sm btn-lg" th:href="@{/pokemon/delete/} + ${pk.idPokemon}"
+								title="Delete Pokémon" onclick="return confirm('Are you sure?')">
+								<img class="img-responsive center-box" th:src="@{/images/trash.png}" height="auto">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<br>
+	</br>
+
+	<footer th:replace="template/template :: footer"> </footer>
+
+</body>
+
+</html>
