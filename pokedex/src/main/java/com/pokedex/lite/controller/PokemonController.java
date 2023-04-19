@@ -38,9 +38,7 @@ public class PokemonController {
 
 	@GetMapping("/")
 	public String pokemonList(Model model) {
-		List<Pokemon> listedPokemon = pokemonService.listAll();
-		listedPokemon = listedPokemon.stream().filter(pokemon -> Boolean.TRUE.equals(pokemon.isEnabled()))
-				.collect(Collectors.toList());
+		List<Pokemon> listedPokemon = pokemonService.findAllEnabled();
 
 		model.addAttribute("title", "Pokémon List");
 		model.addAttribute("pokemons", listedPokemon);
@@ -122,10 +120,8 @@ public class PokemonController {
 	@GetMapping("/evolutions/{id}")
 	public String evolutionList(@PathVariable("id") Long idPokemon, Model model) {
 		Pokemon pokemon = pokemonService.searchById(idPokemon);
-
-		List<Evolution> evolutions = pokemon.getEvolutions();
-		evolutions = evolutions.stream().filter(evolution -> Boolean.TRUE.equals(evolution.isEnabled()))
-				.collect(Collectors.toList());
+		
+		List<Evolution> evolutions = evolutionService.findByPokemonIdAllEnabled(idPokemon);
 
 		model.addAttribute("title", pokemon.getName() + "'s Evolutions");
 		model.addAttribute("evolutions", evolutions);

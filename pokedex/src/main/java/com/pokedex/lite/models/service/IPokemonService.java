@@ -13,4 +13,5 @@ public interface IPokemonService {
 	public void delete (Long id);
 	
 	public Pokemon findByName(@Param("name") String name);
+	public List<Pokemon> findAllEnabled();
 }

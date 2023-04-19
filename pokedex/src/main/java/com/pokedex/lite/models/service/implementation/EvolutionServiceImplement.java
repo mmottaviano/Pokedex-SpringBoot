@@ -31,4 +31,9 @@ public class EvolutionServiceImplement implements IEvolutionService {
 		return evolutionRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public List<Evolution> findByPokemonIdAllEnabled(Long idPokemon) {		
+		return evolutionRepository.findByPokemonIdAllEnabled(idPokemon);
+	}
+
 }

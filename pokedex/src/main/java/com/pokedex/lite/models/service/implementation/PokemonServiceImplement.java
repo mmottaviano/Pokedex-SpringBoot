@@ -42,4 +42,9 @@ public class PokemonServiceImplement implements IPokemonService {
 		return pokemonRepository.findByName(name);		
 	}	
 	
+	@Override
+	public  List<Pokemon> findAllEnabled(){
+		return pokemonRepository.findAllEnabled();
+	}
+	
 }

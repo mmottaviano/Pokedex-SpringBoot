@@ -1,7 +1,8 @@
 package com.pokedex.lite.models.service;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -31,8 +32,6 @@ public class PokemonServiceImplementTest {
 	public void TestTU02FindbyName() {
 
 		assertEquals(pokemonService.findByName("Lapras").getName(), "Lapras");
-		
-		//assertNotNull(pokemonService.findByName("Pepe"));
 	}
 	
 	
